@@ -1,0 +1,90 @@
+﻿@model Food.Models.ViewModels.DishVM
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="Dish.Id" hidden />
+     <input asp-for="Dish.ImageUrl" hidden />
+
+     <div class="row">
+         <div class="col-10">
+             <div class="border p-3 mt-4" row>
+    <div class="col-12 pb-2">
+        <h2 class="text-primary">@(Model.Dish.Id!=0?"Update": "Create") Potrawę</h2>
+        <hr />
+    </div>
+    
+    <div class="mb-3">
+        <label asp-for="Dish.Name">Nazwa potrawy:</label>
+        <input asp-for="Dish.Name" class="form-control" />
+        <span asp-validation-for="Dish.Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Dish.Ingredients">Składniki:</label>
+        <textarea asp-for="Dish.Ingredients" rows="3" class="form-control"></textarea>
+        <span asp-validation-for="Dish.Ingredients" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Dish.Preparation">Przygotowanie:</label>
+        <textarea asp-for="Dish.Preparation" class="form-control"></textarea>
+        <span asp-validation-for="Dish.Preparation" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 col-1">
+        <label asp-for="Dish.Price">Cena:</label>
+        <input asp-for="Dish.Price" class="form-control" />
+        <span asp-validation-for="Dish.Price" class="text-danger"></span>
+    </div>
+
+     <div class="mb-3">
+        <label asp-for="Dish.ImageUrl">Zdjęcie:</label>
+        <input type="file" id="yploadBox" name="file" class="form-control" />     
+    </div>
+
+     <div class="mb-3">
+        <label asp-for="Dish.CategoryId">Kategoria:</label>
+        <select asp-for="Dish.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+            <option disabled selected>--Wybierz kategorię--</option>
+        </select>
+        <span asp-validation-for="Dish.CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 ">
+        <label asp-for="Dish.LevelTypeId">Poziom trudności:</label>
+        <select asp-for="Dish.LevelTypeId" asp-items="@Model.LevelTypeList" class="form-select">
+            <option disabled selected>--Wybierz poziom trudności--</option>
+        </select>
+        <span asp-validation-for="Dish.LevelTypeId" class="text-danger"></span>
+    </div>
+    <div>
+        @if (Model.Dish.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Edytuj</button>
+            }
+            else
+            {
+                 <button type="submit" onclick="Return ValidateInput()" class="btn btn-primary" style="width:150px">Stwórz</button>
+            }
+            
+    <a asp-controller="Dish" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        Wróc do listy
+    </a>
+    </div>
+    
+    </div>
+         </div>
+         <div class="col-2" pt-4>
+             <img src="@Model.Dish.ImageUrl"
+             width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+         </div>
+     </div>
+
+
+    
+</form>
+
+@section Scripts{
+    @{
+  <partial name="_ValidationScriptsPartial" />
+    }
+}

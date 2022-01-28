@@ -1,0 +1,32 @@
+﻿<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-5">
+            <h2 class="text-primary">Lista potraw</h2>
+        </div>
+        <div class="col-6">
+            <a asp-controller="Dish" asp-action="Upsert" class="btn btn-primary">
+                Dodaj nową potrawę
+            </a>
+    </div>
+
+<br /><br />
+
+<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Nazwa potrawy</th>
+            <th>Składniki</th>
+            <th>Przygotowanie</th>
+            <th>Cena</th>
+            <th>Kategoria</th>
+            <th>Poziom trudności</th>
+            <th></th>
+            
+        </tr>
+    </thead>  
+</table>
+</div>  
+
+@section Scripts{
+    <script src="~/js/dish.js"></script>
+}
